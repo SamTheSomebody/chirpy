@@ -12,6 +12,7 @@ type apiConfig struct {
 	fileserverHits atomic.Int32
 	DB             database.Queries
 	Platform       string
+	TokenSecret    string
 }
 
 func (cfg *apiConfig) middlewareMetricsInc(next http.Handler) http.Handler {
