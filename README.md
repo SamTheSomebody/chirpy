@@ -12,7 +12,7 @@ Clone this repository onto your machine. You'll need to create a `.env`	file wit
 DB_URL="" //insert database url here
 PLATFORM="dev"
 TOKEN_SECRET="" //generate a random 256 bit string
-POLKA_KEY="mock payment api key - unavailable"
+POLKA_KEY="" //mock payment api key, supplied by boot.dev and therefore unavailable
 ```
 
 
