@@ -19,6 +19,7 @@ func main() {
 	dbURL := os.Getenv("DB_URL")
 	platform := os.Getenv("PLATFORM")
 	tokenSecret := os.Getenv("TOKEN_SECRET")
+	polkaKey := os.Getenv("POLKA_KEY")
 	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
 		log.Fatal(err)
@@ -29,6 +30,7 @@ func main() {
 		DB:          dbQueries,
 		Platform:    platform,
 		TokenSecret: tokenSecret,
+		PolkaKey:    polkaKey,
 	}
 
 	mux := http.NewServeMux()
@@ -38,10 +40,15 @@ func main() {
 	mux.HandleFunc("GET /admin/metrics", apiCfg.getFileserverHits)
 	mux.HandleFunc("POST /admin/reset", handlerRemoveUsers)
 	mux.HandleFunc("POST /api/users", handlerAddUser)
+	mux.HandleFunc("PUT /api/users", handlerUpdateUser)
 	mux.HandleFunc("POST /api/login", handlerLoginUser)
+	mux.HandleFunc("POST /api/refresh", handlerRefreshJWT)
+	mux.HandleFunc("POST /api/revoke", handlerRevokeRefreshToken)
 	mux.HandleFunc("POST /api/chirps", handlerAddChirp)
 	mux.HandleFunc("GET /api/chirps", handlerGetChirps)
 	mux.HandleFunc("GET /api/chirps/{chirpID}", handlerGetChirp)
+	mux.HandleFunc("DELETE /api/chirps/{chirpID}", handlerDeleteChirp)
+	mux.HandleFunc("POST /api/polka/webhooks", handlerPaymentWebhook)
 
 	server := &http.Server{}
 	server.Addr = ":8080"
