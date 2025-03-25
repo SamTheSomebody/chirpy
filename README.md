@@ -9,9 +9,9 @@ Everything you need to get this repository up and running.
 ### Installation:
 Clone this repository onto your machine. You'll need to create a `.env`	file with the following fields:
 ```
-DB_URL="insert database url here"
+DB_URL="" //insert database url here
 PLATFORM="dev"
-TOKEN_SECRET="generate a random 256 bit string"
+TOKEN_SECRET="" //generate a random 256 bit string
 POLKA_KEY="mock payment api key - unavailable"
 ```
 
@@ -19,9 +19,9 @@ POLKA_KEY="mock payment api key - unavailable"
 ### Requisites:
 * [Go toolchain](https://go.dev/doc/install)
 * [PostgreSQL](https://www.postgresql.org/download/)
-	You need to initialize a database.
+	You'll need to initialize a database.
 * [Goose](https://github.com/pressly/goose) 
-	Once Postgres is up and running you need to [apply all available migrations](https://github.com/pressly/goose?tab=readme-ov-file#up).
+	Once Postgres is up and running, you'll need to [apply all available migrations](https://github.com/pressly/goose?tab=readme-ov-file#up).
 * [SQLC](https://github.com/sqlc-dev/sqlc)
 	No generated files are included in this repo. These can be created with `sqlc generate`.
 
